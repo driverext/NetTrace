@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetTrace • Real-Time Traceroute Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/leaflet.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">NetTrace</p>
+                <h1>Watch your packets cross the planet.</h1>
+                <p class="lede">TCP-first traceroute with live geo, ASN, and hop classification streamed directly to the map.</p>
+            </div>
+            <form id="trace-form" class="trace-form" onsubmit="return false;">
+                <label for="target">Target host or IP</label>
+                <div class="input-row">
+                    <input id="target" name="target" type="text" placeholder="example.com" autocomplete="off" required />
+                    <button type="button" id="trace-button">Trace</button>
+                    <button type="button" id="stop-button" class="ghost">Stop</button>
+                </div>
+                <div class="input-row small">
+                    <label class="inline">
+                        Protocol
+                        <select id="protocol">
+                            <option value="auto">Auto (TCP→ICMP→UDP)</option>
+                            <option value="tcp">TCP SYN</option>
+                            <option value="icmp">ICMP</option>
+                            <option value="udp">UDP</option>
+                        </select>
+                    </label>
+                    <label class="inline">
+                        Max TTL
+                        <input id="max-ttl" type="number" min="1" max="64" value="30" />
+                    </label>
+                    <label class="checkbox inline">
+                        <input type="checkbox" id="compare-mode" />
+                        <span>Compare mode</span>
+                    </label>
+                </div>
+                <label class="checkbox">
+                    <input type="checkbox" id="share-location" checked />
+                    <span>Attach my approximate location for private hops</span>
+                </label>
+                <div class="form-actions">
+                    <div class="hint">Streams results via SSE: no refreshes, no polling.</div>
+                    <div class="actions">
+                        <button type="button" id="export-json" class="ghost">Export JSON</button>
+                        <button type="button" id="export-csv" class="ghost">Export CSV</button>
+                    </div>
+                </div>
+            </form>
+        </header>
+
+        <main class="layout">
+            <section class="map-panel">
+                <div id="status-bar">
+                    <span id="status-pill" class="pill">Idle</span>
+                    <span id="status-detail" class="muted">Waiting to trace</span>
+                </div>
+                <div id="map"></div>
+            </section>
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div>
+                        <p class="eyebrow">Live hops</p>
+                        <h2 id="status-text">Idle</h2>
+                    </div>
+                    <div class="legend" id="legend"></div>
+                </div>
+                <div class="timeline">
+                    <canvas id="rtt-chart" width="400" height="120"></canvas>
+                </div>
+                <div id="run-toggles" class="run-toggles"></div>
+                <div id="hop-list" class="hop-list"></div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="/static/leaflet.js"></script>
+    <script src="/static/map.js"></script>
+</body>
+</html>
