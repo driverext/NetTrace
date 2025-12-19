@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 
 .venv
+=======
+venv/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+>>>>>>> c6e5830 (Added more accurate mapping using submarine cables and routing algorithm)

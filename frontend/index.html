@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NetTrace - Visual Internet Path Mapper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>NetTrace - Visual Internet Path Mapper</h1>
+    <form id="traceForm">
+      <input id="site" type="text" placeholder="Enter a domain or IP (e.g., google.com)" />
+      <div class="proto-group">
+        <label><input type="checkbox" name="proto" value="tcp" checked /> TCP</label>
+        <label><input type="checkbox" name="proto" value="icmp" /> ICMP</label>
+        <label><input type="checkbox" name="proto" value="udp" /> UDP</label>
+      </div>
+      <button id="traceBtn" type="submit">Trace</button>
+      <button id="stopBtn" type="button" class="secondary">Stop</button>
+      <button id="shareBtn" type="button" class="secondary">Share Link</button>
+      <button id="exportJsonBtn" type="button" class="secondary">Export JSON</button>
+      <button id="exportCsvBtn" type="button" class="secondary">Export CSV</button>
+    </form>
+    <div id="results">Ready.</div>
+    <div class="stats-row">
+      <div><strong>Total Hops:</strong> <span id="statHops">0</span></div>
+      <div><strong>Countries:</strong> <span id="statCountries">0</span></div>
+      <div><strong>ASNs:</strong> <span id="statAsnCount">0</span></div>
+      <div><strong>Total Distance:</strong> <span id="statDistance">0 km</span></div>
+    </div>
+    <div id="asnPathWrap">
+      <strong>AS Path:</strong> <span id="asnPath">—</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="map"></section>
+
+    <aside>
+      <div class="panel">
+        <h3>Hops</h3>
+        <ul id="hopList"></ul>
+      </div>
+
+      <div class="panel">
+        <h3>RTT per Hop</h3>
+        <canvas id="rttChart" height="180"></canvas>
+      </div>
+
+      <div class="panel">
+        <h3>Explain This Trace</h3>
+        <div id="explain"></div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/map.js"></script>
+</body>
+</html>
