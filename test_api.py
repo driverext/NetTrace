@@ -1,6 +1,6 @@
 import requests
 
-url = "http://127.0.0.1:5000/health"
+url = "http://127.0.0.1:5000/api/health"
 r = requests.get(url)
 
 print("Status:", r.status_code)

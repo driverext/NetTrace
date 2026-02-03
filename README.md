@@ -30,6 +30,16 @@ python app.py
 ```
 4) Open http://127.0.0.1:5000 and start a trace.
 
+### GitHub Pages (static demo)
+This repo includes a static demo build in `docs/` so you can publish it with GitHub Pages.
+The demo does not run live traces (no backend). It plays a built-in sample trace instead.
+
+Steps:
+1) In GitHub, go to Settings -> Pages.
+2) Set Source to `Deploy from a branch`.
+3) Select `main` (or `master`) and `/docs` as the folder.
+4) Save. Your site will be published at `https://<username>.github.io/<repo>/`.
+
 ### UI assets
 - Leaflet JS/CSS and marker images vendored locally in `static/` to avoid CDN issues.
 

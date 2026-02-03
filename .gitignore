@@ -1,10 +1,12 @@
-<<<<<<< HEAD
-
-.venv
-=======
 venv/
+.venv/
 __pycache__/
 *.pyc
 .env
 .DS_Store
->>>>>>> c6e5830 (Added more accurate mapping using submarine cables and routing algorithm)
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+pip-install.log
+Capture.PNG
